@@ -51,7 +51,7 @@
          "Type":"String"
       },
       "ClusterSize":{
-        "Description" : "Number of ElasticSearch instances to launch for the RabbitMQ server",
+        "Description" : "Number of ElasticSearch instances to launch",
         "Type" : "Number",
         "Default" : "3"
       },
