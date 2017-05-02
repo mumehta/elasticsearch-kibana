@@ -75,9 +75,9 @@
    "Mappings":{  
       "EnvMappings": {
          "dev": {
-            "ALBPrivateSubnetA": "subnet-38d6424f",
-            "ALBPrivateSubnetB": "subnet-254a2540",
-            "ALBPrivateSubnetC": "subnet-5a9a921c",
+            "ALBPublicSubnetA": "subnet-9fa4f3fb",
+            "ALBPublicSubnetB": "subnet-76eb9000",
+            "ALBPublicSubnetC": "subnet-aa37bef3",
             "ESMasterDesiredCapacity": 0,
             "ESMasterEBSSize": "100", 
             "ESMasterInstanceType": "t2.large",  
@@ -91,8 +91,8 @@
             "KibanaESHeap": "2g",
             "MasterESHeap": "4g",
             "NodeESHeap": "4g",  
-            "PrivateSubnets": "subnet-38d6424f,subnet-254a2540,subnet-5a9a921c",  
-            "VpcId": "vpc-65cc4f00", 
+            "PublicSubnets": "subnet-9fa4f3fb,subnet-76eb9000,subnet-aa37bef3",  
+            "VpcId": "vpc-02b63d66", 
             "ebsoptimized": "False", 
             "loggingbucket": "elb-logs"
          }
@@ -125,7 +125,7 @@
                {
                   "Ref": "Environment"
                },
-               "PrivateSubnets"]
+               "PublicSubnets"]
             }]
          },
          "Type": "AWS::AutoScaling::AutoScalingGroup"
@@ -195,7 +195,7 @@
                {
                   "Ref": "Environment"
                },
-               "PrivateSubnets"]
+               "PublicSubnets"]
             }]
          },
          "Type": "AWS::AutoScaling::AutoScalingGroup"
@@ -370,8 +370,39 @@
                   "unzip awscli-bundle.zip\n",
                   "python3 ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws\n",
                   "aws configure set default.region $AWS_DEFAULT_REGION\n",
-                  "echo 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 | base64 -d | aws kms decrypt --region ap-southeast-2 --ciphertext-blob fileb://<(cat <&0) --output text --query Plaintext",
-                  " | base64 -d | bash\n"]]
+                  "#!/bin/bash -ex\n",
+                  "sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - \n",
+                  "sudo apt-get install apt-transport-https \n",
+                  "sudo echo \"deb https://artifacts.elastic.co/packages/5.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list \n",
+                  "sudo apt-get update && sudo apt-get install -y elasticsearch elasticsearch-curator openjdk-8-jre language-pack-en\n",
+                  "sudo update-rc.d elasticsearch defaults 95 10 \n",
+                  "declare -a esplugins=(discovery-ec2 analysis-phonetic repository-s3) \n",
+                  "for esplugin in \"${esplugins[@]}\" \n",
+                  "do\n",
+                  "/usr/share/elasticsearch/bin/elasticsearch-plugin install $esplugin\n",
+                  "done\n",
+                  "ASG_NAME=$(aws autoscaling describe-auto-scaling-instances --instance-ids $(curl http://169.254.169.254/latest/meta-data/instance-id -s) --query AutoScalingInstances[].AutoScalingGroupName --output text)\n",
+                  "NODES_ASG_NAME=$(aws cloudformation describe-stack-resources --stack-name $CFN_STACK --logical-resource-id AutoScalingGroupNode --query 'StackResources[].PhysicalResourceId' --output text)\n",
+                  "MASTER_ASG_NAME=$(aws cloudformation describe-stack-resources --stack-name $CFN_STACK --logical-resource-id AutoScalingGroupMaster --query 'StackResources[].PhysicalResourceId' --output text)\n",
+                  "NODES_CLUSTER_LIST=$(for ID in $(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $NODES_ASG_NAME $MASTER_ASG_NAME --query AutoScalingGroups[].Instances[].InstanceId --output text); do aws ec2 describe-instances --instance-ids $ID --query Reservations[].Instances[].PrivateIpAddress --output text; done)\n",
+                  "INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id -s)\n",
+                  "INSTANCE_LIST=$(echo \"$NODES_CLUSTER_LIST\" | awk -vORS=, '{ print \"\\\"\" $1 \"\\\"\" }' | sed 's/,$/\n/')\n",
+                  "export env=$(aws ec2 describe-tags --filters \"Name=key,Values=env\" \"Name=resource-id,Values=$INSTANCE_ID\" --query 'Tags[0].Value' --output text)\n",
+                  "sysctl vm.swappiness=1\n",
+                  "cat << EOF >> /etc/elasticsearch/elasticsearch.yml\n",
+                  "network.host: 0.0.0.0\n",
+                  "node.data: true\n",
+                  "discovery:\n",
+                  "  zen.hosts_provider: ec2\n",
+                  "node.name: $INSTANCE_ID\n",
+                  "cluster.name: $CFN_STACK\n",
+                  "discovery.zen.ping.unicast.hosts: [ $INSTANCE_LIST ]\n",
+                  "EOF\n",
+                  "echo 'node.master: true' >> /etc/elasticsearch/elasticsearch.yml\n",
+                  "echo ES_JAVA_OPTS=\"\\\"-Xms$ES_HEAP -Xmx$ES_HEAP\\\"\" >> /etc/default/elasticsearch\n",
+                  "/bin/systemctl daemon-reload\n",
+                  "/etc/init.d/elasticsearch start\n"
+                  ]]
                }
             }
          },
@@ -463,7 +494,6 @@
                   "python3 ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws\n",
                   "aws configure set default.region $AWS_DEFAULT_REGION\n",
                   "aws ec2 create-volume --size 100 --availability-zone $AVAILABILITY_ZONE --volume-type gp2\n",
-                  "echo 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 | base64 -d | aws kms decrypt --region ap-southeast-2 --ciphertext-blob fileb://<(cat <&0) --output text --query Plaintext",
                   " | base64 -d | bash\n"]]
                }
             }
@@ -542,21 +572,21 @@
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetA"]
+               "ALBPublicSubnetA"]
             },
             {
                "Fn::FindInMap": ["EnvMappings",
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetB"]
+               "ALBPublicSubnetB"]
             },
             {
                "Fn::FindInMap": ["EnvMappings",
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetC"]
+               "ALBPublicSubnetC"]
             }],
             "Tags": [{
                "Key": "name",
@@ -810,7 +840,7 @@
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetA"]
+               "ALBPublicSubnetA"]
             },
             "Tags": [{
                "Key": "Name",
@@ -872,7 +902,29 @@
                   "curl \"https://s3.amazonaws.com/aws-cli/awscli-bundle.zip\" -o \"awscli-bundle.zip\"\n",
                   "unzip awscli-bundle.zip\n",
                   "python3 ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws\n",
-                  " | base64 -d | bash\n"]]
+                  "#!/bin/bash -ex \n",
+                  "sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - \n",
+                  "sudo apt-get install apt-transport-https \n",
+                  "sudo echo \"deb https://artifacts.elastic.co/packages/5.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list \n",
+                  "sudo apt-get update && sudo apt-get install -y elasticsearch openjdk-8-jre kibana language-pack-en \n",
+                  "sudo update-rc.d elasticsearch defaults 95 10 \n",
+                  "sudo update-rc.d kibana defaults 95 10 \n",
+                  "mkdir -p /etc/elasticsearch /etc/kibana \n",
+                  "sysctl vm.swappiness=1 \n",
+                  "export instanceid=$(curl http://169.254.169.254/latest/meta-data/instance-id -s) \n",
+                  "export stackname=$(aws ec2 describe-tags --filters \"Name=key,Values=aws:cloudformation:stack-name\" \"Name=resource-id,Values=$instanceid\" --query 'Tags[0].Value' --output text) \n",
+                  "export esurl=$(aws cloudformation describe-stack-resources --stack-name $stackname --logical-resource-id CnameNodeELB --query 'StackResources[*].PhysicalResourceId' --output text) \n",
+                  "cat << EOF >> /etc/kibana/kibana.yml \n",
+                  "server.host: \"0.0.0.0\"\n",
+                  "elasticsearch.url: \"http://$esurl:80\"\n",
+                  "elasticsearch.preserveHost : true\n",
+                  "EOF\n",
+                  "echo ES_JAVA_OPTS=\"\"-Xms$ES_HEAP -Xmx$ES_HEAP\"\" >> /etc/default/elasticsearch\n",
+                  "/bin/systemctl daemon-reload\n",
+                  "/bin/systemctl enable kibana.service\n",
+                  "/etc/init.d/elasticsearch start\n",
+                  "systemctl start kibana.service\n"
+                  ]]
                }
             }
          },
@@ -904,21 +956,21 @@
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetA"]
+               "ALBPublicSubnetA"]
             },
             {
                "Fn::FindInMap": ["EnvMappings",
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetB"]
+               "ALBPublicSubnetB"]
             },
             {
                "Fn::FindInMap": ["EnvMappings",
                {
                   "Ref": "Environment"
                },
-               "ALBPrivateSubnetC"]
+               "ALBPublicSubnetC"]
             }],
             "Tags": [{
                "Key": "name",
@@ -1019,7 +1071,7 @@
       }
    },
    "Outputs" : {
-    "LaunchConfigMaster" : {
+    "LaunchConfig" : {
       "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "NodeALB", "DNSName" ]}]] },
       "Description" : "URL for ElasticSearch endpoint"
     }
