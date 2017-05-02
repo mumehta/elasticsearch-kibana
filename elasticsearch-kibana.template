@@ -19,7 +19,7 @@
          "Type": "String"
       },
       "BucketName": {
-         "Default": "mycobucketnameunique",
+         "Default": "mycobucketnameunique1",
          "Type": "String"
       },
       "InstanceCount":{  
@@ -683,7 +683,7 @@
                   },
                   {
                      "Fn::Join": ["",
-                     ["arn:aws:s3:::mycobucketnameunique-dev-elb-logs",
+                     ["arn:aws:s3:::mycobucketnameunique1-dev-elb-logs",
                      "/*"]]
                   },
                   {
